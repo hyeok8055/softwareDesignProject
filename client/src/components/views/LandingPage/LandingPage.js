@@ -76,6 +76,12 @@ function LandingPage(props) {
                 <NaverMapAPI/>
               </RenderAfterNavermapsLoaded>
             </Content>
+            <Sider>
+              blabla
+            </Sider>
+            <Footer>
+              blabla
+            </Footer>
           </Layout>
         </Layout>          
     );

@@ -56,7 +56,7 @@ userSchema.pre('save',function( next ){
 })
 
 
-//comparePassword 메소드 정의
+//userSchema에 comparePassword 메소드 정의
 userSchema.methods.comparePassword = function (plainPassword, cb) {
     //plainpassword 와 암호화된 비밀번호가 동일한지 체크하는 함수
     //암호화된 비밀번호를 복호화 할수는 없으므로 plainPassword를 암호화하여 동일한지 체크한다.
