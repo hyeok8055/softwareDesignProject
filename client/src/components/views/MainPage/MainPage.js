@@ -35,13 +35,25 @@ function MainPage(props) {
             width: '100%', // 네이버지도 가로 길이
             height: '85vh' // 네이버지도 세로 길이
           }}
-          defaultCenter={{ lat: 37.554722, lng: 126.970833 }} // 지도 초기 위치
+          defaultCenter={{ lat: 35.885056, lng: 128.615623 }} // 지도 초기 위치
           defaultZoom={13} // 지도 초기 확대 배율
           zoomControl = {true}
         >
-          <Marker
+          <Marker 
             key = {1}
-            position = {new navermaps.LatLng(37.551229, 126.988205)}
+            position = {new navermaps.LatLng(35.885056, 128.615623)}
+            animation ={2}
+            onClick={() => {alert('여기는 N서울 타워입니다.')}}
+          />
+          <Marker 
+            key = {2}
+            position = {new navermaps.LatLng(35.885990, 128.615953)}
+            animation ={2}
+            onClick={() => {alert('여기는 N서울 타워입니다.')}}
+          />
+          <Marker 
+            key = {3}
+            position = {new navermaps.LatLng(35.887990, 128.613953)}
             animation ={2}
             onClick={() => {alert('여기는 N서울 타워입니다.')}}
           />

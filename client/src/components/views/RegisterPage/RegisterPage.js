@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {useDispatch} from 'react-redux';
 import {registerUser} from '../../../_actions/user_action';
 import { withRouter } from 'react-router-dom';
-//antd
+//antd 디자인 부분
 import {
     Form,
     Input,

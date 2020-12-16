@@ -6,6 +6,11 @@ const cookieParser = require('cookie-parser');
 const config = require('./config/key');
 const { auth } = require("./middleware/auth");
 const { User } = require("./models/User");
+const { Mart } = require("./models/Mart");
+const { Product } = require("./models/Product");
+const { Price } = require("./models/Price");
+
+
 
 //application/ x-www-form-urlencoded 의 형식을 분석해서 가져옴
 app.use(bodyParser.urlencoded({extended: true}));
@@ -26,6 +31,48 @@ mongoose.connect(config.mongoURI, {
 app.get('/', (req, res) => {
   res.send('Hello World! asfasdfasfaf')
 })
+
+////////////////////////////// 마트 관련 데이터 생성 //////////////////////////////
+
+app.post('/api/mart',(req, res) => {
+  // 마트 정보를 클라이언트에서 가져와 DB에 넣어준다
+  const mart = new Mart(req.body)
+
+  mart.save((err,doc) => {
+      if(err) return res.json({success: false, err})
+      return res.status(200).json({
+          success: true
+      })
+  })
+})
+
+app.post('/api/product',(req, res) => {
+  // 마트 정보를 클라이언트에서 가져와 DB에 넣어준다
+  const product = new Product(req.body)
+
+  product.save((err,doc) => {
+      if(err) return res.json({success: false, err})
+      return res.status(200).json({
+          success: true
+      })
+  })
+})
+
+app.post('/api/price',(req, res) => {
+  // 마트 정보를 클라이언트에서 가져와 DB에 넣어준다
+  const price = new Price(req.body)
+
+  price.save((err,doc) => {
+      if(err) return res.json({success: false, err})
+      return res.status(200).json({
+          success: true
+      })
+  })
+})
+
+//////////////////////////////                    //////////////////////////////
+
+
 
 //회원 가입 라우트
 app.post('/api/users/register',(req,res) =>{

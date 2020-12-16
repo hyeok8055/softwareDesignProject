@@ -10,6 +10,7 @@ import LandingPage from './components/views/LandingPage/LandingPage'
 import LoginPage from './components/views/LoginPage/LoginPage'
 import RegisterPage from './components/views/RegisterPage/RegisterPage'
 import MainPage from './components/views/MainPage/MainPage'
+import MartPage from './components/views/AdminPage/MartPage'
 import Auth from './hoc/auth'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/login" component = {Auth(LoginPage,false)} />
           <Route exact path="/register" component = {Auth(RegisterPage,false)}/>
           <Route exact path="/main" component = {Auth(MainPage,true)}/>
+          <Route exact path="/mart" component = {Auth(MartPage,null)}/>
         </Switch>
       </div>
     </Router>
