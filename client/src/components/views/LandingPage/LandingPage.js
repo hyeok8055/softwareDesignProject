@@ -5,7 +5,6 @@ import { RenderAfterNavermapsLoaded, NaverMap, Marker } from 'react-naver-maps';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import { withRouter } from 'react-router-dom'
-import {genMarker} from ''
 //ant design
 import { Layout, Button, Space } from 'antd';
 const {Header, Footer, Sider, Content} = Layout;
