@@ -1,7 +1,3 @@
-//   디자인 엎어버리기   //
-
-
-
 import React, {useEffect} from 'react';
 import useGeolocation from 'react-hook-geolocation';
 //naver-map-components
@@ -9,9 +5,21 @@ import { RenderAfterNavermapsLoaded, NaverMap, Marker } from 'react-naver-maps';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import { withRouter } from 'react-router-dom'
-//ant design
-import { Layout, Button, Space } from 'antd';
+///////////////////// ant design 전용 공간 ///////////////////////////////////////////////////
+import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+import { Layout, Button, Row, Col, Form,Input, Menu } from 'antd';
+
 const {Header, Footer, Sider, Content} = Layout;
+const { SubMenu } = Menu;
+
+
+
+
+
+
+///////////////////// ant design 전용 공간 ///////////////////////////////////////////////////
+
+
 
 function LandingPage(props) {
 
@@ -59,8 +67,60 @@ function LandingPage(props) {
       props.history.push("/register")
     }
 
-
+    //////////////////// 앤트 디자인 전용 공간 ///////////////////////////
     return (
+      <Layout>
+        <Header><h1 color = 'red'>관리자 전용 페이지 입니다</h1></Header>
+        <Content>
+          <Row>
+            <Col span={8}>
+              <Form.Item >
+                <Input></Input>
+                <Input></Input>
+                <Input></Input>
+                <Input></Input>
+                <Input></Input>
+                <Button type="primary" htmlType="submit" >
+                마트등록
+                </Button>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+            <Form.Item >
+                <Input></Input>
+                <Input></Input>
+                <Button type="primary" htmlType="submit" >
+                마트등록 sasdgsadg
+                </Button>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+            <Form.Item >
+                <Input></Input>
+                <Input></Input>
+                <Input></Input>
+                <Input></Input>
+                <Input></Input>
+                <Button type="primary" htmlType="submit" >
+                waegoawgoiowig
+                </Button>
+              </Form.Item>
+            </Col>
+          </Row>
+        </Content>
+        <Footer></Footer>
+     </Layout>
+    );
+    //////////////////// 앤트 디자인 전용 공간 ///////////////////////////
+
+}
+
+export default withRouter(LandingPage)
+
+
+
+/* 
+
         <Layout>
           <Header style={{ position: 'fixed', zIndex: 1, width: '100%', display: 'flex', justifyContent:'flex-end' }}>
             <Space className="buttons">
@@ -87,9 +147,5 @@ function LandingPage(props) {
               blabla
             </Footer>
           </Layout>
-        </Layout>          
-    );
-}
-
-export default withRouter(LandingPage)
-
+        </Layout>
+*/
