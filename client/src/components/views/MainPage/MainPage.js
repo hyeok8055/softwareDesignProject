@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 //naver-map-components
 import { RenderAfterNavermapsLoaded, NaverMap, Marker } from 'react-naver-maps';
 import axios from 'axios';
@@ -6,14 +6,12 @@ import {useDispatch} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 //ant design
 import { Layout, Button, Space } from 'antd';
+import GenMarker from './genMarker';
 const {Header, Footer, Sider, Content} = Layout;
 
 function MainPage(props) {
 
-
-    useEffect(() => {
-        axios.get('/api/hello').then(response => {console.log(response)})
-    }, [])
+    /////////////////// 로그아웃 처리 //////////////////
 
     const onLogoutHandler =() =>{
         axios.get('/api/users/logout')
@@ -25,9 +23,41 @@ function MainPage(props) {
             }
         })
     }
-    //지도 띄우기
-    function NaverMapAPI() {
-      const navermaps = window.naver.maps;      
+
+    ///////////////////////////// 지도 띄우기 ///////////////////////////////
+    const [Lat,setLat] = useState('')
+    const [Lng,setLng] = useState('')
+
+    let body = {
+      lat: Lat,
+      lng: Lng
+    }
+    // 서버를 통해 DB에서 데이터 받아오기
+    axios.post('/api/sendGeoList',body)
+        .then((res) => {
+            console.log(res)
+        })
+    // 필터링 작업 필요
+    
+   function NaverMapAPI() {
+
+      const navermaps = window.naver.maps;   
+      /////////////////////// 여기서부터   ///////////////////////
+      const lat = [35.885056,35.885256,35.885456,35.885656]
+      const lng = [128.618123,128.615923,128.614623,128.615723]
+      let i = 0
+      const Mark = lat.map((latitude, index) =>{
+        return(
+          <Marker 
+              key = {index}
+              position = {new navermaps.LatLng(latitude, lng[i++])}
+              animation ={2}
+              onClick={() => {alert('여기는 N서울 타워입니다.')}}
+          />
+        )
+      })
+      console.log(Mark)
+      /////////////////////// 여기까지가 마커를 반복적으로 찍어내는 부분   ///////////////////////
       return (
         <NaverMap
           mapDivId={'maps-getting-started-uncontrolled'} // default: react-naver-map
@@ -40,23 +70,13 @@ function MainPage(props) {
           zoomControl = {true}
         >
           <Marker 
-            key = {1}
+            key = {10}
             position = {new navermaps.LatLng(35.885056, 128.615623)}
             animation ={2}
             onClick={() => {alert('여기는 N서울 타워입니다.')}}
           />
-          <Marker 
-            key = {2}
-            position = {new navermaps.LatLng(35.885990, 128.615953)}
-            animation ={2}
-            onClick={() => {alert('여기는 N서울 타워입니다.')}}
-          />
-          <Marker 
-            key = {3}
-            position = {new navermaps.LatLng(35.887990, 128.613953)}
-            animation ={2}
-            onClick={() => {alert('여기는 N서울 타워입니다.')}}
-          />
+          {Mark}
+          
         </NaverMap>
       );
     }
