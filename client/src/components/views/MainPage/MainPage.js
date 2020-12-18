@@ -6,7 +6,6 @@ import {useDispatch} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 //ant design
 import { Layout, Button, Space } from 'antd';
-import GenMarker from './genMarker';
 const {Header, Footer, Sider, Content} = Layout;
 
 function MainPage(props) {
@@ -69,7 +68,7 @@ function MainPage(props) {
           defaultZoom={13} // 지도 초기 확대 배율
           zoomControl = {true}
         >
-          <Marker 
+          <Marker
             key = {10}
             position = {new navermaps.LatLng(35.885056, 128.615623)}
             animation ={2}
