@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux'
 import {auth} from '../_actions/user_action';
@@ -30,7 +29,7 @@ export default function(SpecificComponent, option, adminRoute = null) {
                     } else {
                         if(option === false){
                             //로그인한 유저가 로그인한 유저는 출입 불가능한 페이지에 접속하려고 할 때
-                            props.history.push('/')
+                            props.history.push('/main')
                         }
                     }
                 }

@@ -3,21 +3,9 @@ import {useDispatch} from 'react-redux';
 import {registerUser} from '../../../_actions/user_action';
 import { withRouter } from 'react-router-dom';
 //antd 디자인 부분
-import {
-    Form,
-    Input,
-    Tooltip,
-    Cascader,
-    Select,
-    Row,
-    Col,
-    Checkbox,
-    Button,
-    AutoComplete,
-  } from 'antd';
+//antd
+import { Form, Input, Button, Layout, Space } from 'antd';
 
-const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
 
 function RegisterPage(props) {
 
@@ -67,62 +55,66 @@ function RegisterPage(props) {
         
     }
 
-    return (
-        <Form
-        name="register"
-      >
-        <Form.Item
-          name="email"
-          label="E-mail"
-          rules={[
-            {
-              type: 'email',
-              message: 'The input is not valid E-mail!',
-            },
-            {
-              required: true,
-              message: 'Please input your E-mail!',
-            },
-          ]}
-        >
-          <Input type="email" value={Email} onChange={onEmailHandler}/>
-        </Form.Item>
-          
-        <Form.Item
-        name="name"
-        label={
-          <span>
-            name&nbsp;
-          </span>
-        }
-        rules={[{ required: true, message: 'Please input your name!', whitespace: true }]}
-      >
-        <Input type="text" value={Name} onChange={onNameHandler}/>
-      </Form.Item>
+    const onCancelRegisterHandler = (event) => {
+      props.history.push('/')
+    }
 
-        <Form.Item
-          name="password"
-          label="Password"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your password!',
-            },
-          ]}
+    return (
+      <Layout class ='body'>
+        <Form
+          name="register"
+          className="login-form"
         >
-          <Input.Password type="password" value={Password} onChange={onPasswordHandler}/>
-        </Form.Item>
-  
-        <Form.Item
-          name="confirm"
-          label="Confirm Password"
+          <Form.Item
+            name="email"
+            rules={[
+              {
+                type: 'email',
+                message: 'The input is not valid E-mail!',
+              },
+              {
+                required: true,
+                message: 'Please input your E-mail!',
+              },
+            ]}
+          >
+            <Input placeholder="Email" type="email" value={Email} onChange={onEmailHandler}/>
+          </Form.Item>
+            
+          <Form.Item
+          name="name"
+          rules={[{ required: true, message: 'Please input your name!', whitespace: true }]}
         >
-          <Input.Password type="password" value={ConfirmPassword} onChange={onConfirmPasswordHandler}/>
+          <Input placeholder='name' type="text" value={Name} onChange={onNameHandler}/>
         </Form.Item>
-        <Button type="primary" htmlType="submit" onClick={onSubmitHandler}>
-          Register
-        </Button>
-      </Form>
+
+          <Form.Item
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your password!',
+              },
+            ]}
+          >
+            <Input.Password placeholder='password' type="password" value={Password} onChange={onPasswordHandler}/>
+          </Form.Item>
+    
+          <Form.Item
+            name="confirm"
+          >
+            <Input.Password placeholder='Confirm Password' type="password" value={ConfirmPassword} onChange={onConfirmPasswordHandler}/>
+          </Form.Item>
+          <Space style={{ width: '100%', display: 'flex', justifyContent:'flex-end',paddingRight: '0px' }}>
+            <Button type="primary" shape='round' htmlType="submit" onClick={onSubmitHandler}>
+              Register
+            </Button>
+            <Button type="primary" shape='round' htmlType="submit" onClick={onCancelRegisterHandler}>
+              Cancel
+            </Button>
+          </Space> 
+        </Form>
+      </Layout>
     )
 }
 

@@ -5,19 +5,17 @@ import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 //ant design
-import { Layout, Button, Space } from 'antd';
-import GenMarker from './genMarker';
-const {Header, Footer, Sider, Content} = Layout;
+import { Layout, Button, Space, Card } from 'antd';
+const {Header, Sider, Content} = Layout;
 
 function MainPage(props) {
-
     /////////////////// 로그아웃 처리 //////////////////
 
     const onLogoutHandler =() =>{
         axios.get('/api/users/logout')
         .then(response => {
             if(response.data.success){
-                props.history.push("/login")
+                props.history.push("/")
             } else {
                 alert("로그아웃하는데 실패했습니다.")
             }
@@ -58,16 +56,17 @@ function MainPage(props) {
       })
       console.log(Mark)
       /////////////////////// 여기까지가 마커를 반복적으로 찍어내는 부분   ///////////////////////
+
       return (
         <NaverMap
           mapDivId={'maps-getting-started-uncontrolled'} // default: react-naver-map
-          style={{
-            width: '100%', // 네이버지도 가로 길이
-            height: '85vh' // 네이버지도 세로 길이
-          }}
           defaultCenter={{ lat: 35.885056, lng: 128.615623 }} // 지도 초기 위치
-          defaultZoom={13} // 지도 초기 확대 배율
+          defaultZoom={18} // 지도 초기 확대 배율
           zoomControl = {true}
+          style={{
+            width: '100%',
+            height: '95vh',
+          }}
         >
           <Marker 
             key = {10}
@@ -84,27 +83,22 @@ function MainPage(props) {
 
     return (
         <Layout>
-          <Header style={{ position: 'fixed', zIndex: 1, width: '100%', display: 'flex', justifyContent:'flex-end' }}>
-            <Space className="buttons">
-              <Button type="primary" onClick={onLogoutHandler}>Logout</Button>
-            </Space>
-          </Header>
-          <Layout>
-            <Content>
-            <RenderAfterNavermapsLoaded
-              ncpClientId={"3w74nk3yv7"}
-              // Naver Cloud Platform 유저의 경우 props.clientId 대신 props.ncpClientId를 사용합니다. 
-              // ncpClientId={YOUR_NCP_CLIENT_ID} 
-              error={<p>Maps Load Error</p>}
-              loading={<p>Maps Loading...</p>}
-            
-            >
-              <NaverMapAPI />
-            </RenderAfterNavermapsLoaded>
-            </Content>
-            <Sider>Sider</Sider>
-          </Layout>
-          <Footer>Footer</Footer>
+              <Header  style={{ width: '100%', display: 'flex', justifyContent:'flex-end',paddingRight: '15px' }}>
+                <Space>
+                  <Button type='primary' onClick={onLogoutHandler}>LogOut</Button>
+                </Space> 
+              </Header>
+              <Content>
+                <RenderAfterNavermapsLoaded
+                  ncpClientId={"3w74nk3yv7"}
+                  // Naver Cloud Platform 유저의 경우 props.clientId 대신 props.ncpClientId를 사용합니다. 
+                  // ncpClientId={YOUR_NCP_CLIENT_ID} 
+                  error={<p>Maps Load Error</p>}
+                  loading={<p>Maps Loading...</p>}
+                >
+                  <NaverMapAPI/>
+                </RenderAfterNavermapsLoaded>
+              </Content>       
         </Layout>          
     );
 }

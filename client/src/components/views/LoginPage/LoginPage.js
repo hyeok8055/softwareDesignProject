@@ -1,20 +1,11 @@
 import React, { useState } from 'react'
-import Axios from 'axios'
 import {useDispatch} from 'react-redux';
 import {loginUser} from '../../../_actions/user_action';
 import { withRouter } from 'react-router-dom';
+
 //antd
-import { Form, Input, Button, Checkbox } from 'antd';
-
-const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-};
-
-const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
-};
-
+import { Form, Input, Button, Layout } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 
 function LoginPage(props) {
@@ -37,60 +28,68 @@ function LoginPage(props) {
     }
     
     const onSubmitHandler = (event) => {
-        event.preventDefault();
+      event.preventDefault();
 
-        let body = {
-            email: Email,
-            password: Password
-        }
+      let body = {
+          email: Email,
+          password: Password
+      }
 
-        dispatch(loginUser(body))
-            .then(response => {
-                if(response.payload.loginSuccess){
-                    props.history.push('/main')
-                } else {
-                    alert('Error')
-                }
-            })
-        
+      dispatch(loginUser(body))
+          .then(response => {
+              if(response.payload.loginSuccess){
+                  props.history.push('/main')
+              } else {
+                  alert('Error')
+              }
+          })
     }
 
     return (
-      <Form
-      {...layout}
-      name="basic"
-      initialValues={{ remember: true }}
-    >
-      <Form.Item
-        label="Username"
-        name="username"
-        rules={[{ required: true, message: 'Please input your username!' }]}
-      >
-        <Input type="email" value={Email} onChange={onEmailHandler}/>
-      </Form.Item>
-
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[{ required: true, message: 'Please input your password!' }]}
-      >
-        <Input.Password type="password" value={Password} onChange={onPasswordHandler}/>
-      </Form.Item>
-
-      <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item>
-
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit" onClick={onSubmitHandler}>
-          SignIn
-        </Button>
-
-        <Button type="primary" onClick={onSignUpHandler}>
-          SignUp
-        </Button>
-      </Form.Item>
-    </Form>
+      <Layout class='body'>
+        <Form
+          name="normal_login"
+          className="login-form"
+          initialValues={{
+            remember: true,
+          }}
+        >
+          <Form.Item
+            name="Email"  
+            rules={[
+              {
+                required: true,
+                message: 'Please input your Email!',
+              },
+            ]}
+          >
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" type="email" value={Email} onChange={onEmailHandler} />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your Password!',
+              },
+            ]}
+          >
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password"
+              value={Password} 
+              onChange={onPasswordHandler}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button className="login-form-button" type = 'primary' shape = 'round' htmlType="submit" onClick={onSubmitHandler} block>
+              Log in
+            </Button>
+            <br/>Or <a onClick={onSignUpHandler}>register now!</a>
+          </Form.Item>
+        </Form>
+      </Layout>
     )
 }
 
