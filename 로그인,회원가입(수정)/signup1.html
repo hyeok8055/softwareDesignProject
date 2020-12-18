@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>생필품 가격공유: 회원가입</title>
+		<link rel="stylesheet" type="text/css" href="styles/signup1.css">
+		<meta name ="keyword" content ="회원가입.html">
+	</head>
+	<body>
+		<section class="login-form">
+			<div class = "container">
+			<h1>회원가입</h1>
+			<form action ="signup1.html" method="POST">
+					
+						<div class ="account-info">
+							<label for ="id-name">
+							이름</label>
+							<input type = "text" name = "name" id = "id-name"required="required">
+						</div>
+
+						<div class = "account-info">
+							<label for ="id-account">이메일</label>
+							<input type = "text" name = "account" id="id-account" required="required">
+						</div>
+						<div class ="account-info">
+							<label for ="id-password">비밀번호</label>
+							<input type = "password" name ="password" id="id-password" required="required">
+						</div>
+				
+				<div class ="caption">
+					<input type="checkbox" name="agree" id="id-agree"required="required"/>
+					<label for="id-agree">
+						사이트 이용약관과 개인정보 수집방침에 동의합니다.
+					</label>
+				</div>
+				<div class ="btn-area">
+				<button type="submit">가입하기</button>
+				</div>
+
+			</form>
+		</div>
+		</section>
+	</body>
+
+</html>
