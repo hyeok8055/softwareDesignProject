@@ -27,18 +27,29 @@ function MainPage(props) {
     ///////////////////////////// 지도 띄우기 ///////////////////////////////
     const [Lat,setLat] = useState('')
     const [Lng,setLng] = useState('')
-
+    var lat = new Array();
+    var lng = new Array();
     let body = {
-      lat: Lat,
-      lng: Lng
+      latt: Lat,
+      lngg: Lng
     }
     // 서버를 통해 DB에서 데이터 받아오기
-    axios.post('/api/sendGeoList',body)
+    var applepie = axios.post('/api/sendGeoList',body)
         .then((res) => {
-            console.log(res)
+            return res
         })
+    for(var i=0; i<applepie.length; i++){
+      if(calcDistance(applepie.body.latt, applepie.body.lngg, currentlat, currentlng)<500){
+        lat.push(applepie.body.latt)
+        lng.push(applepie.body.lngg)
+      }
+    }
+
+    
     // 필터링 작업 필요
     
+ 
+
    function NaverMapAPI() {
 
       const navermaps = window.naver.maps;   
@@ -81,6 +92,24 @@ function MainPage(props) {
       );
     }
         
+    function calcDistance(lat1, lon1, lat2, lon2)
+    {
+      var theta = lon1 - lon2;
+      dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1))
+            * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+      dist = Math.acos(dist);
+      dist = rad2deg(dist);
+      dist = dist * 60 * 1.1515;
+      dist = dist * 1.609344;
+      return Number(dist*1000).toFixed(2);
+    }
+
+    function deg2rad(deg) {
+      return (deg * Math.PI / 180);
+    }
+    function rad2deg(rad) {
+      return (rad * 180 / Math.PI);
+    }
 
     return (
         <Layout>
