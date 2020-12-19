@@ -72,11 +72,11 @@ app.post('/api/price',(req, res) => {
 
 ////////////////////////////// 마트 데이터 클라이언트에 제공 //////////////////////////////
 
-app.post('/api/sendGeoList',(req, res) => {
+app.get('/api/sendGeoList',(req, res) => {
   // 사용자가 원하는 정보를 DB에서 가져온다
-  let dataList = Mart.find({})
-  res = dataList
-  return res
+  Mart.find({},{_id: false,lat:true,lng:true},(err,pos)=> {
+    return res.send(pos)
+  })
 })
 
 

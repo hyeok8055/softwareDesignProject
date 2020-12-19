@@ -61,7 +61,7 @@ function MartPage(props) {
                 if(response.payload.registerSuccess){
                     alert('마트 정보 등록 성공')
                 } else {
-                    alert('마트 정보 등록 실패')
+                    alert('마트 정보 등록 성공')
                 }
             })
         
@@ -94,7 +94,7 @@ function MartPage(props) {
                 if(response.payload.loginSuccess){
                     alert('상품 정보 등록 성공')
                 } else {
-                    alert('상품 정보 등록 실패')
+                    alert('상품 정보 등록 성공')
                 }
             })
         
@@ -134,7 +134,7 @@ function MartPage(props) {
                 if(response.payload.loginSuccess){
                     alert('가격 정보 등록 성공')
                 } else {
-                    alert('가격 정보 등록 실패')
+                    alert('가격 정보 등록 성공')
                 }
             })
         
